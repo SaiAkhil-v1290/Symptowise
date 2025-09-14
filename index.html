@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthAI - Disease Prediction Platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-heartbeat"></i>
+                <span>HealthAI</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link active">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#ai-doc" class="nav-link">AI Doc</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#find-doc" class="nav-link">Find Doc</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#medicine-reminder" class="nav-link">Medicine Reminder</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <section id="home" class="page active">
+        <div class="hero-section">
+            <div class="hero-content">
+                <h1>Welcome to HealthAI</h1>
+                <p>Your intelligent health companion for disease prediction and medical assistance</p>
+                <div class="cta-buttons">
+                    <button class="btn btn-primary" onclick="showPage('ai-doc')">
+                        <i class="fas fa-robot"></i>
+                        Try AI Doctor
+                    </button>
+                    <button class="btn btn-secondary" onclick="showPage('find-doc')">
+                        <i class="fas fa-user-md"></i>
+                        Find Doctor
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="features-section">
+            <div class="container">
+                <h2>Our Services</h2>
+                <div class="features-grid">
+                    <div class="feature-card" onclick="showPage('ai-doc')">
+                        <div class="feature-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h3>AI Doctor</h3>
+                        <p>Get instant health assessment based on your symptoms. Our AI analyzes your condition and provides recommendations, including emergency alerts when immediate medical attention is needed.</p>
+                        <button class="btn btn-outline">Try Now</button>
+                    </div>
+
+                    <div class="feature-card" onclick="showPage('find-doc')">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <h3>Find Doctor</h3>
+                        <p>Locate qualified healthcare professionals in your area. Browse through verified doctors, specialists, and medical centers near you.</p>
+                        <button class="btn btn-outline">Find Now</button>
+                    </div>
+
+                    <div class="feature-card" onclick="showPage('medicine-reminder')">
+                        <div class="feature-icon">
+                            <i class="fas fa-pills"></i>
+                        </div>
+                        <h3>Medicine Reminder</h3>
+                        <p>Never miss your medication again! Set up personalized reminders with alarms to ensure you take your medicines on time.</p>
+                        <button class="btn btn-outline">Set Reminder</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Doc Page -->
+    <section id="ai-doc" class="page">
+        <div class="container">
+            <div class="page-header">
+                <h1><i class="fas fa-robot"></i> AI Doctor</h1>
+                <p>Describe your symptoms and get an intelligent health assessment</p>
+            </div>
+
+            <div class="ai-doc-container">
+                <div class="symptom-input-section">
+                    <h3>Describe Your Symptoms</h3>
+                    <textarea id="symptoms-input" placeholder="Please describe your symptoms in detail. For example: I have been experiencing fever, headache, and fatigue for the past 2 days..."></textarea>
+                    <div class="input-actions">
+                        <button class="btn btn-primary" onclick="analyzeSymptoms()">
+                            <i class="fas fa-search"></i>
+                            Analyze Symptoms
+                        </button>
+                        <button class="btn btn-secondary" onclick="clearInput()">
+                            <i class="fas fa-trash"></i>
+                            Clear
+                        </button>
+                    </div>
+                </div>
+
+                <div id="analysis-result" class="analysis-result hidden">
+                    <div class="result-header">
+                        <h3><i class="fas fa-clipboard-list"></i> Analysis Result</h3>
+                    </div>
+                    <div class="result-content">
+                        <div class="severity-indicator">
+                            <span id="severity-level" class="severity-badge"></span>
+                        </div>
+                        <div class="analysis-text">
+                            <p id="analysis-text"></p>
+                        </div>
+                        <div class="recommendations">
+                            <h4>Recommendations:</h4>
+                            <ul id="recommendations-list"></ul>
+                        </div>
+                        <div id="emergency-alert" class="emergency-alert hidden">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <h3>Emergency Alert!</h3>
+                            <p>Based on your symptoms, we strongly recommend seeking immediate medical attention. Please go to the nearest emergency room or call emergency services.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Find Doc Page -->
+    <section id="find-doc" class="page">
+        <div class="container">
+            <div class="page-header">
+                <h1><i class="fas fa-user-md"></i> Find Doctor</h1>
+                <p>Locate healthcare professionals near you using GPS location</p>
+            </div>
+
+            <div class="find-doc-container">
+                <!-- Location Section -->
+                <div class="location-section">
+                    <div class="location-card">
+                        <h3><i class="fas fa-map-marker-alt"></i> Your Location</h3>
+                        <div id="location-info">
+                            <button id="get-location-btn" class="btn btn-primary">
+                                <i class="fas fa-crosshairs"></i> Get My Location
+                            </button>
+                            <button class="btn btn-secondary" onclick="searchWithDefaultLocation()">
+                                <i class="fas fa-map-marker-alt"></i> Use Hyderabad
+                            </button>
+                            <div id="location-details" class="hidden">
+                                <p><strong>Address:</strong> <span id="user-address">Loading...</span></p>
+                                <p><strong>Coordinates:</strong> <span id="user-coordinates">Loading...</span></p>
+                            </div>
+                            <div class="manual-location">
+                                <p><strong>Or search by city:</strong></p>
+                                <div class="location-inputs">
+                                    <input type="text" id="city-input" placeholder="Enter your city (e.g., Mumbai, Delhi, Bangalore)" style="margin-right: 10px; padding: 8px; border-radius: 5px; border: 1px solid #ccc;">
+                                    <button class="btn btn-outline" onclick="searchByCity()">
+                                        <i class="fas fa-search"></i> Search
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Search Section -->
+                <div class="search-section">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="doctor-search" placeholder="Search for doctors, specialties, or locations...">
+                        <button class="btn btn-primary" onclick="searchDoctors()">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                        <button class="btn btn-secondary" onclick="searchWithDefaultLocation()">
+                            <i class="fas fa-map-marker-alt"></i> Search NYC
+                        </button>
+                    </div>
+                    <div class="filters">
+                        <select id="specialty-filter">
+                            <option value="">All Specialties</option>
+                            <option value="General Medicine">General Medicine</option>
+                            <option value="Cardiology">Cardiology</option>
+                            <option value="Dermatology">Dermatology</option>
+                            <option value="Neurology">Neurology</option>
+                            <option value="Pediatrics">Pediatrics</option>
+                            <option value="Orthopedics">Orthopedics</option>
+                            <option value="Gynecology">Gynecology</option>
+                            <option value="Psychiatry">Psychiatry</option>
+                        </select>
+                        <select id="distance-filter">
+                            <option value="5">Within 5 km</option>
+                            <option value="10" selected>Within 10 km</option>
+                            <option value="25">Within 25 km</option>
+                            <option value="50">Within 50 km</option>
+                        </select>
+                        <select id="rating-filter">
+                            <option value="">Any Rating</option>
+                            <option value="4">4+ Stars</option>
+                            <option value="3">3+ Stars</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Loading State -->
+                <div id="search-loading" class="loading-section hidden">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Searching for doctors near you...</p>
+                </div>
+
+                <!-- Results Section -->
+                <div id="doctor-results" class="results-section">
+                    <div class="results-header">
+                        <h3>Doctors Near You</h3>
+                        <div class="results-count">
+                            <span id="results-count">0</span> doctors found
+                        </div>
+                    </div>
+                    <div id="doctors-list" class="doctors-list">
+                        <!-- Doctors will be populated here -->
+                    </div>
+                </div>
+
+                <!-- No Results -->
+                <div id="no-results" class="no-results hidden">
+                    <i class="fas fa-user-md"></i>
+                    <h3>No Doctors Found</h3>
+                    <p>Try adjusting your search criteria or expanding the search radius.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Medicine Reminder Page -->
+    <section id="medicine-reminder" class="page">
+        <div class="container">
+            <div class="page-header">
+                <h1><i class="fas fa-pills"></i> Medicine Reminder</h1>
+                <p>Set up medication reminders to never miss a dose</p>
+            </div>
+
+            <div class="reminder-container">
+                <div class="add-reminder-section">
+                    <h3>Add New Reminder</h3>
+                    <form id="reminder-form">
+                        <div class="form-group">
+                            <label>Medicine Name</label>
+                            <input type="text" id="medicine-name" placeholder="Enter medicine name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Dosage</label>
+                            <input type="text" id="dosage" placeholder="e.g., 1 tablet, 2 capsules" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Time</label>
+                            <input type="time" id="reminder-time" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Frequency</label>
+                            <select id="frequency" required>
+                                <option value="once">Once</option>
+                                <option value="daily">Daily</option>
+                                <option value="twice">Twice a day</option>
+                                <option value="three">Three times a day</option>
+                                <option value="weekly">Weekly</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-plus"></i>
+                            Add Reminder
+                        </button>
+                    </form>
+                </div>
+
+                <div class="reminders-list-section">
+                    <h3>Active Reminders</h3>
+                    <div id="reminders-list" class="reminders-list">
+                        <div class="no-reminders">
+                            <i class="fas fa-bell-slash"></i>
+                            <p>No reminders set yet. Add your first reminder above!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Notification -->
+    <div id="notification" class="notification hidden">
+        <i class="fas fa-bell"></i>
+        <span id="notification-text"></span>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
