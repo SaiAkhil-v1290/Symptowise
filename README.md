@@ -189,7 +189,7 @@ For support and questions:
 - Review the code comments
 - Test with the provided debugging tools
 
-## 🔄 Version History
+##  Version History
 
 - **v1.0.0**: Initial release with basic features
 - **v1.1.0**: Added GPS location detection
