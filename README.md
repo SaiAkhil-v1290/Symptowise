@@ -1,5 +1,5 @@
 # Symptowise
-# 🏥 Disease Prediction & Doctor Finder Website
+#  Disease Prediction & Doctor Finder Website
 
 A comprehensive healthcare website that combines AI-powered disease prediction with real-time doctor search functionality. Built with modern web technologies and integrated with Google Gemini AI for intelligent symptom analysis.
 
